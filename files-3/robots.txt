@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maiarainsford34-lang.github.io/whatsonhenley/sitemap.xml
