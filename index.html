@@ -209,7 +209,7 @@ body {
   border: 2px solid #ffffff;
   min-height: 165px;
   margin-bottom: 0;
-  cursor: default;
+  cursor: pointer;
   transition: background 0.2s;
   overflow: hidden;
 }
@@ -264,6 +264,8 @@ body {
   flex-shrink: 0;
 }
 .details-btn-row {
+  text-decoration: none;
+  display: inline-block;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.4);
   color: var(--cream);
@@ -428,7 +430,7 @@ body {
     <span class="day-date">· 25 September 2026</span>
   </div>
 
-  <div class="event-row" data-venue="kenton">
+  <div class="event-row" data-venue="kenton" onclick="togglePanel('clare-teal')">
     <div class="event-thumb"><img src="imgs/clare-teal.png" alt="Clare Teal"></div>
     <div class="event-info">
       <div class="event-date-label">FRI 25 SEPT &nbsp;·&nbsp; 7:30pm</div>
@@ -436,7 +438,7 @@ body {
       <div class="event-venue-tag">The Kenton Theatre</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('clare-teal')">DETAILS</button>
+      <a class="details-btn-row" href="events/clare-teal.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-clare-teal">
@@ -472,7 +474,7 @@ body {
     <button class="close-panel-btn" onclick="togglePanel('clare-teal')">✕ &nbsp;Close</button>
   </div>
 
-  <div class="event-row" data-venue="purdys">
+  <div class="event-row" data-venue="purdys" onclick="togglePanel('joe-webb')">
     <div class="event-thumb"><img src="imgs/joe-webb.png" alt="Joe Webb Trio"></div>
     <div class="event-info">
       <div class="event-date-label">FRI 25 SEPT &nbsp;·&nbsp; 8:00pm</div>
@@ -480,7 +482,7 @@ body {
       <div class="event-venue-tag">Purdy's Pop Up</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('joe-webb')">DETAILS</button>
+      <a class="details-btn-row" href="events/joe-webb.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-joe-webb">
@@ -516,7 +518,7 @@ body {
     <button class="close-panel-btn" onclick="togglePanel('joe-webb')">✕ &nbsp;Close</button>
   </div>
 
-  <div class="event-row" data-venue="town-hall">
+  <div class="event-row" data-venue="town-hall" onclick="togglePanel('buena-bristol')">
     <div class="event-thumb"><img src="imgs/buena-bristol.jpg" alt="Buena Bristol Social Club"></div>
     <div class="event-info">
       <div class="event-date-label">FRI 25 SEPT &nbsp;·&nbsp; 8:00pm</div>
@@ -524,7 +526,7 @@ body {
       <div class="event-venue-tag">The Henley Town Hall Ballroom</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('buena-bristol')">DETAILS</button>
+      <a class="details-btn-row" href="events/buena-bristol.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-buena-bristol">
@@ -568,7 +570,7 @@ body {
     <span class="day-date">· 26 September 2026</span>
   </div>
 
-  <div class="event-row" data-venue="new-orleans">
+  <div class="event-row" data-venue="new-orleans" onclick="togglePanel('riverboat-shuffle')">
     <div class="event-thumb"><img src="imgs/adrian-cox.png" alt="Riverboat Shuffle"></div>
     <div class="event-info">
       <div class="event-date-label">SAT 26 SEPT &nbsp;·&nbsp; 3:00pm</div>
@@ -576,7 +578,7 @@ body {
       <div class="event-venue-tag">The New Orleans — Upper Thames</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('riverboat-shuffle')">DETAILS</button>
+      <a class="details-btn-row" href="events/riverboat-shuffle.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-riverboat-shuffle">
@@ -612,7 +614,7 @@ body {
     <button class="close-panel-btn" onclick="togglePanel('riverboat-shuffle')">✕ &nbsp;Close</button>
   </div>
 
-  <div class="event-row" data-venue="kenton">
+  <div class="event-row" data-venue="kenton" onclick="togglePanel('joe-stilgoe')">
     <div class="event-thumb"><img src="imgs/joe-stilgoe.jpg" alt="Joe Stilgoe"></div>
     <div class="event-info">
       <div class="event-date-label">SAT 26 SEPT &nbsp;·&nbsp; 7:30pm</div>
@@ -620,7 +622,7 @@ body {
       <div class="event-venue-tag">The Kenton Theatre</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('joe-stilgoe')">DETAILS</button>
+      <a class="details-btn-row" href="events/joe-stilgoe.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-joe-stilgoe">
@@ -656,7 +658,7 @@ body {
     <button class="close-panel-btn" onclick="togglePanel('joe-stilgoe')">✕ &nbsp;Close</button>
   </div>
 
-  <div class="event-row" data-venue="town-hall">
+  <div class="event-row" data-venue="town-hall" onclick="togglePanel('bruce-ilett')">
     <div class="event-thumb"><img src="imgs/big-band.jpg" alt="The Big Band Swing Dance"></div>
     <div class="event-info">
       <div class="event-date-label">SAT 26 SEPT &nbsp;·&nbsp; 8:00pm</div>
@@ -664,7 +666,7 @@ body {
       <div class="event-venue-tag">The Henley Town Hall Ballroom</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('big-band-swing-dance')">DETAILS</button>
+      <a class="details-btn-row" href="events/big-band-swing-dance.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-bruce-ilett">
@@ -700,7 +702,7 @@ body {
     <button class="close-panel-btn" onclick="togglePanel('bruce-ilett')">✕ &nbsp;Close</button>
   </div>
 
-  <div class="event-row" data-venue="purdys">
+  <div class="event-row" data-venue="purdys" onclick="togglePanel('liane-carroll')">
     <div class="event-thumb"><img src="imgs/liane-carroll.png" alt="Liane Carroll" style="object-position:center top;"></div>
     <div class="event-info">
       <div class="event-date-label">SAT 26 SEPT &nbsp;·&nbsp; 8:00pm</div>
@@ -708,7 +710,7 @@ body {
       <div class="event-venue-tag">Purdy's Pop Up</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('liane-carroll')">DETAILS</button>
+      <a class="details-btn-row" href="events/liane-carroll.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-liane-carroll">
@@ -752,7 +754,7 @@ body {
     <span class="day-date">· 27 September 2026</span>
   </div>
 
-  <div class="event-row" data-venue="new-orleans">
+  <div class="event-row" data-venue="new-orleans" onclick="togglePanel('salute-satchmo')">
     <div class="event-thumb"><img src="imgs/enrico-tomasso.png" alt="A Salute to Satchmo"></div>
     <div class="event-info">
       <div class="event-date-label">SUN 27 SEPT &nbsp;·&nbsp; 3:00pm</div>
@@ -760,7 +762,7 @@ body {
       <div class="event-venue-tag">The New Orleans — Upper Thames</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('salute-satchmo')">DETAILS</button>
+      <a class="details-btn-row" href="events/salute-satchmo.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-salute-satchmo">
@@ -796,7 +798,7 @@ body {
     <button class="close-panel-btn" onclick="togglePanel('salute-satchmo')">✕ &nbsp;Close</button>
   </div>
 
-  <div class="event-row" data-venue="kenton">
+  <div class="event-row" data-venue="kenton" onclick="togglePanel('sentimental-journey')">
     <div class="event-thumb"><img src="imgs/sentimental-journey.jpg" alt="Sentimental Journey"></div>
     <div class="event-info">
       <div class="event-date-label">SUN 27 SEPT &nbsp;·&nbsp; 7:30pm</div>
@@ -804,7 +806,7 @@ body {
       <div class="event-venue-tag">The Kenton Theatre</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('sentimental-journey')">DETAILS</button>
+      <a class="details-btn-row" href="events/sentimental-journey.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-sentimental-journey">
@@ -840,7 +842,7 @@ body {
     <button class="close-panel-btn" onclick="togglePanel('sentimental-journey')">✕ &nbsp;Close</button>
   </div>
 
-  <div class="event-row" data-venue="purdys">
+  <div class="event-row" data-venue="purdys" onclick="togglePanel('festival-allstars')">
     <div class="event-thumb"><img src="imgs/festival-allstars.jpg" alt="Festival Allstars"></div>
     <div class="event-info">
       <div class="event-date-label">SUN 27 SEPT &nbsp;·&nbsp; 8:30pm</div>
@@ -848,7 +850,7 @@ body {
       <div class="event-venue-tag">Purdy's Pop Up</div>
     </div>
     <div class="event-row-actions">
-      <button class="details-btn-row" onclick="togglePanel('festival-allstars')">DETAILS</button>
+      <a class="details-btn-row" href="events/festival-allstars.html">DETAILS</a>
     </div>
   </div>
   <div class="event-panel" id="panel-festival-allstars">
