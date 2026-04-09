@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henley Jazz Festival 2026 — Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0e1012;
+    font-family: 'Libre Baskerville', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  .wrap { width: 100%; max-width: 980px; }
+
+  .carousel {
+    position: relative;
+    height: 560px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* ── Slides ── */
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    overflow: hidden;
+  }
+  .slide.active { opacity: 1; }
+
+  .slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  /* Ken Burns — four directions */
+  .slide.active img                { animation: kb-a 7s ease-in-out forwards; }
+  .slide:nth-child(1).active img   { animation-name: kb-a; }
+  .slide:nth-child(2).active img   { animation-name: kb-b; }
+  .slide:nth-child(3).active img   { animation-name: kb-c; }
+  .slide:nth-child(4).active img   { animation-name: kb-d; }
+  .slide:nth-child(5).active img   { animation-name: kb-a; }
+  .slide:nth-child(6).active img   { animation-name: kb-b; }
+  .slide:nth-child(7).active img   { animation-name: kb-c; }
+  .slide:nth-child(8).active img   { animation-name: kb-d; }
+  .slide:nth-child(9).active img   { animation-name: kb-a; }
+
+  @keyframes kb-a {
+    0%   { transform: scale(1)    translate(0%,    0%);    }
+    100% { transform: scale(1.1)  translate(-2%,  -1.5%); }
+  }
+  @keyframes kb-b {
+    0%   { transform: scale(1.08) translate(-1.5%, 0%);    }
+    100% { transform: scale(1)    translate(0%,   -1%);    }
+  }
+  @keyframes kb-c {
+    0%   { transform: scale(1)    translate(1.5%, -1%);    }
+    100% { transform: scale(1.1)  translate(0%,   0%);     }
+  }
+  @keyframes kb-d {
+    0%   { transform: scale(1.1)  translate(0%,   -1.5%); }
+    100% { transform: scale(1)    translate(1.5%,  0%);    }
+  }
+
+  /* ── Overlay: strong at bottom for event info, light radial in middle for title ── */
+  .slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.15) 100%);
+    z-index: 1;
+  }
+
+  /* ── Festival title — centred horizontally, pushed into lower third ── */
+  .festival-title {
+    position: absolute;
+    bottom: 110px;          /* sits above the event info strip */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 3;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .festival-title .above {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 9px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: rgba(184,146,74,0.8);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .festival-title .the {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 36px;
+    font-weight: 300;
+    color: #d4aa6a;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+
+  .festival-title .main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #fff;
+    display: block;
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .festival-title .fest {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 34px;
+    font-weight: 300;
+    color: #d4aa6a;
+    display: block;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .festival-title .dates {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    display: block;
+  }
+
+  /* ── Event info — bottom left, small and subtle ── */
+  .event-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.2rem 1.8rem;
+    z-index: 3;
+  }
+
+  .event-info .venue {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #b8924a;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .event-info .act {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(240,235,226,0.9);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .event-info .when {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,235,226,0.45);
+    display: block;
+  }
+
+  /* ── Nav arrows ── */
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(184,146,74,0.3);
+    color: #b8924a;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn:hover { background: rgba(184,146,74,0.15); border-color: rgba(184,146,74,0.65); }
+  .prev { left: 14px; }
+  .next { right: 14px; }
+
+  /* ── Progress bar ── */
+  .progress {
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px; width: 0%;
+    background: #b8924a;
+    z-index: 10;
+    opacity: 0.7;
+  }
+
+  /* ── Dots ── */
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    cursor: pointer; border: none; padding: 0;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .dot.active { background: #b8924a; transform: scale(1.5); }
+
+  @media (max-width: 600px) {
+    .carousel { height: 440px; }
+    .festival-title .main { font-size: 32px; }
+    .festival-title .the, .festival-title .fest { font-size: 26px; }
+    .festival-title { bottom: 100px; }
+    body { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="carousel" id="carousel">
+
+    <div class="slide active">
+      <img src="../imgs/clare-teal.png" alt="Clare Teal" />
+      <div class="event-info">
+        <span class="venue">The Kenton Theatre</span>
+        <span class="act">Clare Teal — Jazz, Swing &amp; Other Things!</span>
+        <span class="when">Friday 25 September 2026</span>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="../imgs/buena-bristol_copy.jpg" alt="Buena Bristol Social Club" />
+      <div class="event-info">
+        <span class="venue">Henley Town Hall</span>
+        <span class="act">'A Night in Havana' with the Buena Bristol Social Club</span>
+        <span class="when">Friday 25 September 2026</span>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="../imgs/joe-webb_copy.png" alt="Joe Webb Trio" />
+      <div class="event-info">
+        <span class="venue">Purdy's Pop Up</span>
+        <span class="act">Joe Webb Trio</span>
+        <span class="when">Friday 25 September 2026</span>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="../imgs/adrian-cox_copy.png" alt="Riverboat Shuffle" />
+      <div class="event-info">
+        <span class="venue">The New Orleans</span>
+        <span class="act">Riverboat Shuffle with Adrian Cox</span>
+        <span class="when">Saturday 26 September 2026</span>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="../imgs/liane-carroll_copy.png" alt="Liane Carroll" />
+      <div class="event-info">
+        <span class="venue">Purdy's Pop Up</span>
+        <span class="act">Liane Carroll</span>
+        <span class="when">Saturday 26 September 2026</span>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="../imgs/big-band_copy.jpg" alt="The Big Band Swing Dance" />
+      <div class="event-info">
+        <span class="venue">Henley Town Hall</span>
+        <span class="act">The Big Band Swing Dance</span>
+        <span class="when">Saturday 26 September 2026</span>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="../imgs/joe_stilgoe_se16_0081_lr_jpg.webp" alt="Joe Stilgoe" />
+      <div class="event-info">
+        <span class="venue">The Kenton Theatre</span>
+        <span class="act">Joe Stilgoe</span>
+        <span class="when">Saturday 26 September 2026</span>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="../imgs/enrico-tomasso_copy.png" alt="A Salute to Satchmo" />
+      <div class="event-info">
+        <span class="venue">The New Orleans</span>
+        <span class="act">A Salute to Satchmo with Enrico Tomasso</span>
+        <span class="when">Sunday 27 September 2026</span>
+      </div>
+    </div>
+
+
+    <div class="slide">
+      <img src="../imgs/sentimental-journey_copy.jpg" alt="Sentimental Journey" />
+      <div class="event-info">
+        <span class="venue">The Kenton Theatre</span>
+        <span class="act">Sentimental Journey</span>
+        <span class="when">Sunday 27 September 2026</span>
+      </div>
+    </div>
+
+    <!-- Festival title overlay — sits in the lower third, above event info -->
+    <div class="festival-title">
+      <span class="above">Henley-on-Thames</span>
+      <span class="the">The</span>
+      <span class="main">HENLEY JAZZ</span>
+      <span class="fest">Festival</span>
+      <span class="dates">25 – 27 September 2026 &nbsp;·&nbsp; Henley-on-Thames</span>
+    </div>
+
+    <button class="btn prev" id="prev" aria-label="Previous">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="10 3 5 8 10 13"/>
+      </svg>
+    </button>
+    <button class="btn next" id="next" aria-label="Next">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 3 11 8 6 13"/>
+      </svg>
+    </button>
+
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  const progress = document.getElementById('progress');
+  const N = slides.length;
+  let cur = 0, timer;
+  const MS = 6000;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.onclick = () => go(i);
+    dotsEl.appendChild(d);
+  });
+
+  function go(n) {
+    slides[cur].classList.remove('active');
+    cur = (n + N) % N;
+    const s = slides[cur];
+    const img = s.querySelector('img');
+    img.style.animation = 'none';
+    s.classList.add('active');
+    requestAnimationFrame(() => { img.style.animation = ''; });
+
+    dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    clearTimeout(timer);
+    progress.style.transition = 'none';
+    progress.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      progress.style.transition = 'width ' + MS + 'ms linear';
+      progress.style.width = '100%';
+    }));
+    timer = setTimeout(() => go(cur + 1), MS);
+  }
+
+  document.getElementById('prev').onclick = () => go(cur - 1);
+  document.getElementById('next').onclick = () => go(cur + 1);
+
+  let tx = 0;
+  const car = document.getElementById('carousel');
+  car.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  car.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+  });
+
+  go(0);
+</script>
+</body>
+</html>
