@@ -88,7 +88,7 @@
     {
       "@type": "Event",
       "name": "Joe Stilgoe",
-      "startDate": "2026-09-26T19:30:00",
+      "startDate": "2026-09-26T19:00:00",
       "location": {"@type": "Place", "name": "The Kenton Theatre, Henley-on-Thames"},
       "performer": {"@type": "Person", "name": "Joe Stilgoe"},
       "url": "https://www.thehenleyjazzfestival.com/events"
@@ -123,7 +123,7 @@
     {
       "@type": "Event",
       "name": "Sentimental Journey",
-      "startDate": "2026-09-27T19:30:00",
+      "startDate": "2026-09-27T18:00:00",
       "location": {"@type": "Place", "name": "The Kenton Theatre, Henley-on-Thames"},
       "performer": [{"@type": "Person", "name": "Rebecca Poole"}, {"@type": "Person", "name": "Denny Ilett"}],
       "url": "https://www.thehenleyjazzfestival.com/events"
@@ -326,7 +326,6 @@ body {
       <a class="details-btn-row" href="https://thehenleyjazzfestival.github.io/events/clare-teal.html" target="_blank">DETAILS</a>
     </div>
   </div>
-  
 
   <div class="event-row" data-venue="purdys" onclick="togglePanel('joe-webb')">
     <div class="event-thumb"><img src="imgs/joe-webb.png" alt="Joe Webb Trio"></div>
@@ -339,7 +338,6 @@ body {
       <a class="details-btn-row" href="https://thehenleyjazzfestival.github.io/events/joe-webb.html" target="_blank">DETAILS</a>
     </div>
   </div>
-  
 
   <div class="event-row" data-venue="town-hall" onclick="togglePanel('buena-bristol')">
     <div class="event-thumb"><img src="imgs/buena-bristol.jpg" alt="Buena Bristol Social Club"></div>
@@ -373,12 +371,11 @@ body {
       <a class="details-btn-row" href="https://thehenleyjazzfestival.github.io/events/riverboat-shuffle.html" target="_blank">DETAILS</a>
     </div>
   </div>
-  
 
   <div class="event-row" data-venue="kenton" onclick="togglePanel('joe-stilgoe')">
     <div class="event-thumb"><img src="imgs/joe-stilgoe.jpg" alt="Joe Stilgoe"></div>
     <div class="event-info">
-      <div class="event-date-label">SAT 26 SEPT &nbsp;·&nbsp; 7:30pm</div>
+      <div class="event-date-label">SAT 26 SEPT &nbsp;·&nbsp; 7:00pm</div>
       <div class="event-row-title">Joe Stilgoe</div>
       <div class="event-venue-tag">The Kenton Theatre</div>
     </div>
@@ -386,7 +383,6 @@ body {
       <a class="details-btn-row" href="https://thehenleyjazzfestival.github.io/events/joe-stilgoe.html" target="_blank">DETAILS</a>
     </div>
   </div>
-  
 
   <div class="event-row" data-venue="town-hall" onclick="togglePanel('bruce-ilett')">
     <div class="event-thumb"><img src="imgs/big-band.jpg" alt="The Big Band Swing Dance"></div>
@@ -399,7 +395,6 @@ body {
       <a class="details-btn-row" href="https://thehenleyjazzfestival.github.io/events/big-band-swing-dance.html" target="_blank">DETAILS</a>
     </div>
   </div>
-  
 
   <div class="event-row" data-venue="purdys" onclick="togglePanel('liane-carroll')">
     <div class="event-thumb"><img src="imgs/liane-carroll.png" alt="Liane Carroll" style="object-position:center top;"></div>
@@ -433,12 +428,11 @@ body {
       <a class="details-btn-row" href="https://thehenleyjazzfestival.github.io/events/salute-satchmo.html" target="_blank">DETAILS</a>
     </div>
   </div>
-  
 
   <div class="event-row" data-venue="kenton" onclick="togglePanel('sentimental-journey')">
     <div class="event-thumb"><img src="imgs/sentimental-journey.jpg" alt="Sentimental Journey"></div>
     <div class="event-info">
-      <div class="event-date-label">SUN 27 SEPT &nbsp;·&nbsp; 7:30pm</div>
+      <div class="event-date-label">SUN 27 SEPT &nbsp;·&nbsp; 6:00pm</div>
       <div class="event-row-title">Sentimental Journey</div>
       <div class="event-venue-tag">The Kenton Theatre</div>
     </div>
@@ -446,7 +440,6 @@ body {
       <a class="details-btn-row" href="https://thehenleyjazzfestival.github.io/events/sentimental-journey.html" target="_blank">DETAILS</a>
     </div>
   </div>
-  
 
   <div class="event-row" data-venue="purdys" onclick="togglePanel('festival-allstars')">
     <div class="event-thumb"><img src="imgs/festival-allstars.jpg" alt="Festival Allstars"></div>
@@ -468,22 +461,15 @@ function togglePanel(id) {
   const btn = document.getElementById('btn-' + id);
   const isOpen = panel.classList.contains('open');
 
-  // Close all panels first
-    
   if (!isOpen) {
     panel.classList.add('open');
     btn.classList.add('open');
     btn.textContent = 'CLOSE';
 
-    // Wait for panel to render then scroll
     setTimeout(function() {
       const row = document.getElementById('panel-' + id).previousElementSibling;
       const rowTop = row.getBoundingClientRect().top + window.pageYOffset;
-      
-      // Scroll within iframe
       window.scrollTo({ top: rowTop - 20, behavior: 'smooth' });
-      
-      // Tell parent Wix page to scroll too
       const absTop = row.getBoundingClientRect().top;
       window.parent.postMessage({ type: 'scrollTo', top: absTop }, '*');
     }, 50);
@@ -494,8 +480,6 @@ function filterEvents(venue, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 
-  // Close any open panels
-    
   document.querySelectorAll('.event-row').forEach(row => {
     const hide = venue !== 'all' && row.dataset.venue !== venue;
     row.classList.toggle('hidden', hide);
