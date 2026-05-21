@@ -28,7 +28,6 @@
     background: #000;
   }
 
-  /* ── Slides ── */
   .slide {
     position: absolute;
     inset: 0;
@@ -46,7 +45,6 @@
     animation-fill-mode: both;
   }
 
-  /* Ken Burns — four directions */
   .slide.active img                { animation: kb-a 7s ease-in-out forwards; }
   .slide:nth-child(1).active img   { animation-name: kb-a; }
   .slide:nth-child(2).active img   { animation-name: kb-b; }
@@ -76,7 +74,6 @@
     100% { transform: scale(1.12) translate(1.5%, -1%);    }
   }
 
-  /* ── Overlay: strong at bottom for event info, light radial in middle for title ── */
   .slide::after {
     content: '';
     position: absolute;
@@ -86,7 +83,6 @@
     z-index: 1;
   }
 
-  /* ── Festival title — centred horizontally, pushed into lower third ── */
   .festival-title {
     position: absolute;
     bottom: 110px;
@@ -150,7 +146,6 @@
     display: block;
   }
 
-  /* ── Event info — single clean line at bottom ── */
   .event-info {
     position: absolute;
     bottom: 0;
@@ -196,7 +191,6 @@
     margin-left: auto;
   }
 
-  /* ── Nav arrows ── */
   .btn {
     position: absolute;
     top: 50%;
@@ -217,7 +211,6 @@
   .prev { left: 14px; }
   .next { right: 14px; }
 
-  /* ── Progress bar ── */
   .progress {
     position: absolute;
     bottom: 0; left: 0;
@@ -227,7 +220,6 @@
     opacity: 0.7;
   }
 
-  /* ── Dots ── */
   .dots {
     display: flex;
     justify-content: center;
@@ -347,16 +339,16 @@
     </div>
 
     <div class="slide">
-      <img src="../imgs/monique-thomas.jpg" alt="Down by the Riverside — Monique B Thomas" />
+      <img src="../imgs/monique-thomas.jpg" alt="Monique B Thomas" />
       <div class="event-info">
         <span class="venue">Henley Town Hall</span>
         <span class="divider">·</span>
-        <span class="act">Down by the Riverside — Monique B Thomas</span>
+        <span class="act">Monique B Thomas presents 'Down By The Riverside'</span>
         <span class="when">Sunday 27 September 2026</span>
       </div>
     </div>
 
-    <!-- Festival title overlay — sits in the lower third, above event info -->
+    <!-- Festival title overlay -->
     <div class="festival-title">
       <span class="above">Henley-on-Thames</span>
       <span class="the">The</span>
